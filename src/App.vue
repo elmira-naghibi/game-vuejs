@@ -23,6 +23,12 @@
         <button @click="giveup">give up</button>
       </div>
     </div>
+    <div class="con" v-if="turns.length>0">
+      <div class="text" v-for="(turn, index) in turns" :key="index"
+           :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+        {{turn.text}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,6 +41,7 @@ export default {
       playerhealth: 100,
       monsterhealth: 100,
       gameIsRunning: false,
+      turns:[]
     };
   },
   watch: {},
@@ -45,20 +52,31 @@ export default {
       this.playerhealth = 100;
       this.monsterhealth = 100;
     },
+
     giveup: function () {
       this.gameIsRunning = false;
     },
+
     help: function () {
       if(this.playerhealth <= 90) {
         this.playerhealth += 10;
       } else {
         this.playerhealth = 100;
       }
+      this.turns.unshift({
+        isPlayer:true,
+        text:"player heals for 10"
+      })
       this.monsterAttack();
     },
 
     specialattack: function () {
-      this.monsterhealth -= this.calculateDamage(10,20);
+      var damage = this.calculateDamage(10,20);
+      this.monsterhealth -= damage;
+      this.turns.unshift({
+        isPlayer:true,
+        text: " player hits monster  harddddddddddddddd   for " + damage
+      })
       if(this.checkWin()){
         return;
       }
@@ -66,19 +84,32 @@ export default {
     },
 
     attack: function () {
-      this.monsterhealth -= this.calculateDamage(3,10);
+      var damage = this.calculateDamage(3,10);
+      this.monsterhealth -= damage
+      this.turns.unshift({
+        isPlayer:true,
+        text: " player hits monster for " + damage
+      })
       if(this.checkWin()){
         return;
       }
       this.monsterAttack();
     },
+
     monsterAttack: function() {
-      this.playerhealth -= this.calculateDamage(5,12)
+      var damage = this.calculateDamage(5, 12) 
+      this.playerhealth -= damage
       this.checkWin();
+      this.turns.unshift({
+        isPlayer:false,
+        text: " monster hits player for " + damage
+      })
     },
+
     calculateDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
     },
+
     checkWin: function () {
       if (this.monsterhealth <= 0) {
         if (confirm("you won!! new game?")) {
@@ -97,6 +128,7 @@ export default {
       }
       return false;
     },
+
   },
 };
 </script>
@@ -113,6 +145,12 @@ export default {
 .con {
   border: 1px solid salmon;
   font-size: 0;
+}
+.text{
+  font-size: 20px;
+  height: 40px;
+  line-height: 40px;
+margin: 5px;
 }
 .center {
   text-align: center;
@@ -146,5 +184,11 @@ button {
 }
 .player {
   background: lightgreen;
+}
+.player-turn{
+  background: lightpink;
+}
+.monster-turn{
+  background:lightsteelblue ;
 }
 </style>
