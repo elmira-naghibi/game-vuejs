@@ -1,0 +1,15 @@
+{
+    "editor.minimap.enabled": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Visual Studio 2019 Dark",
+    "javascript.format.semicolons": "insert",
+    "typescript.format.semicolons": "insert",
+    "html.format.indentInnerHtml": true,
+    "vetur.format.options.tabSize": 4,
+    "vetur.format.options.useTabs": true,
+    "editor.wordWrap": "on",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true
+}
