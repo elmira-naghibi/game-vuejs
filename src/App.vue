@@ -6,6 +6,10 @@
     <formdata></formdata>
     <p v-highlight.delayed="'blue'"> salam </p>
     <p v-highlight:background.delayed="'red'"> hello </p>
+    
+    <p v-local-highlight.delayed.anotherModifier="'blue'"> salam </p>
+    <p v-local-highlight:background.delayed.blink="{ mainColor: 'red', secondColor: 'green', delay: 200 }"> hello </p>
+    <p v-local-highlight ></p>
 
 
   </div>
@@ -19,11 +23,46 @@ import formdata from './form/formdata.vue';
 
 export default {
   name: "App",
+   directives: {
+    "local-highlight": {
+      bind(el, binding, vnode) {
+           var delay = 0;
+          if (binding.modifiers["delayed"]) {
+            delay = 3000;
+          }
+         if (binding.modifiers["blink"]) {
+            let mainColor = binding.value.mainColor;
+            let secondColor = binding.value.secondColor;
+            let currentColor = mainColor;
+            setTimeout(() => {
+              setInterval(() => {
+                    currentColor==secondColor ? currentColor = mainColor : currentColor=secondColor
+                    if (binding.arg == "background") {
+                      el.style.backgroundColor = currentColor;
+                    } else {
+                      el.style.color = currentColor;
+                    }
+                },binding.value.delay)
+              }, delay)
+          }
+          else{
+            setTimeout(() => {
+              if (binding.arg == "background") {
+                el.style.backgroundColor = binding.value;
+              } else {
+                el.style.color = binding.value;
+              }
+            }, delay);
+          }
+      }
+    }   
+  },
   components: { headercar,cars, NewCar, formdata },
   data() {
     return {
       cars:["benz","pride"],
       maxNumberCars:10,
+
      };
   },
   computed: {
@@ -45,7 +84,7 @@ export default {
     }
     
   },
-};
+}
 </script>
 
 <style>
