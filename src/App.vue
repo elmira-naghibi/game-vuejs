@@ -3,6 +3,11 @@
     <headercar :carLength = carLength :maxNumberCars= maxNumberCars ></headercar> 
     <new-car @carAdded="addingNewcar"></new-car>
     <cars :cars = cars @removecar="deletingcar"></cars>
+    <formdata></formdata>
+    <p v-highlight.delayed="'blue'"> salam </p>
+    <p v-highlight:background.delayed="'red'"> hello </p>
+
+
   </div>
 </template>
 
@@ -10,10 +15,11 @@
 import cars from './components/cars.vue';
 import headercar from './components/headercar.vue';
 import NewCar from './components/newCar.vue';
+import formdata from './form/formdata.vue';
 
 export default {
   name: "App",
-  components: { headercar,cars, NewCar },
+  components: { headercar,cars, NewCar, formdata },
   data() {
     return {
       cars:["benz","pride"],
