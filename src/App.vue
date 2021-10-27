@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <headercar :carLength = carLength :maxNumberCars= maxNumberCars ></headercar> 
+    <!-- <headercar :carLength = carLength :maxNumberCars= maxNumberCars ></headercar> 
     <new-car @carAdded="addingNewcar"></new-car>
     <cars :cars = cars @removecar="deletingcar"></cars>
     <formdata></formdata>
@@ -9,9 +9,12 @@
     
     <p v-local-highlight.delayed.anotherModifier="'blue'"> salam </p>
     <p v-local-highlight:background.delayed.blink="{ mainColor: 'red', secondColor: 'green', delay: 200 }"> hello </p>
-    <p v-local-highlight ></p>
-
-
+    <p v-local-highlight >یبسعلششببششششش</p> -->
+      <p>{{ text | to-uppercase }}</p>
+      <p>{{ text | toUppercase | to-lowercase }}</p>
+      <input type="text" v-model="filterText" >
+      {{ filterText }}
+      <p v-for="car in filteredcars" :key="car">{{ car }}</p>
   </div>
 </template>
 
@@ -60,15 +63,28 @@ export default {
   components: { headercar,cars, NewCar, formdata },
   data() {
     return {
-      cars:["benz","pride"],
+      cars:["benz","pride","pezho","lamborgini"],
       maxNumberCars:10,
-
+      text:"salam dobare",
+      filterText:""
      };
   },
   computed: {
     carLength:function(){
       return this.cars.length
+    },
+    filteredcars:function(){
+       return this.cars.filter(element => {
+        return element.match(this.filterText);
+      });
     }
+    
+  },
+  filters: {
+   toUppercase(value) {
+      return value.toUpperCase();
+    },
+
   },
   methods: {
     addingNewcar:function(car) {
