@@ -15,17 +15,21 @@
       <input type="text" v-model="filterText" >
       {{ filterText }}
       <p v-for="car in filteredcars" :key="car">{{ car }}</p>
+      <example-mixin></example-mixin>
   </div>
 </template>
 
 <script>
 import cars from './components/cars.vue';
+import ExampleMixin from './components/exampleMixin.vue';
 import headercar from './components/headercar.vue';
 import NewCar from './components/newCar.vue';
 import formdata from './form/formdata.vue';
+import { carMixin } from "./cars.js"
 
 export default {
   name: "App",
+  mixins:[carMixin],
    directives: {
     "local-highlight": {
       bind(el, binding, vnode) {
@@ -60,25 +64,17 @@ export default {
       }
     }   
   },
-  components: { headercar,cars, NewCar, formdata },
+  components: { headercar,cars, NewCar, formdata, ExampleMixin },
   data() {
     return {
-      cars:["benz","pride","pezho","lamborgini"],
       maxNumberCars:10,
       text:"salam dobare",
-      filterText:""
      };
   },
   computed: {
     carLength:function(){
       return this.cars.length
     },
-    filteredcars:function(){
-       return this.cars.filter(element => {
-        return element.match(this.filterText);
-      });
-    }
-    
   },
   filters: {
    toUppercase(value) {
@@ -97,9 +93,11 @@ export default {
     deletingcar:function(index) {
       console.log("app",index)
       this.cars.splice(index, 1);
-    }
-    
+    },
   },
+  created() {
+      console.log('Created app');
+  }
 }
 </script>
 
