@@ -4,7 +4,7 @@
       <router-link to="/" active-class="active" exact><a>Home</a></router-link>
     </li>
     <li>
-      <router-link to="/one" active-class="active"><a>one</a></router-link>
+      <router-link to="/one/15" active-class="active"><a>one</a></router-link>
     </li>
     <li>
       <router-link to="/two"><a>two</a></router-link>

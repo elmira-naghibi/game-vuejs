@@ -7,7 +7,7 @@ import home from './components/routercom/home.vue';
 
 export const routes = [
     { path: '', component: home },
-    { path: '/one', component: one },
+    { path: '/one/:id', component: one },
     { path: '/two', component: two },
     { path: '/three', component: three },
     { path: '/four', component: four }
