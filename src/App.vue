@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <li>
-      <router-link :to="{name:'homme', params:{ id:$route.params.id }, query:{local:'en', q:'10'}}" active-class="active" exact><a>Home</a></router-link>
+      <router-link :to="{name:'homme', params:{ id:this.id }, query:{local:'en', q:'10'}}" active-class="active" exact><a>Home</a></router-link>
     </li>
     <li>
       <router-link to="/one" active-class="active"><a>one/15</a></router-link>
@@ -11,7 +11,7 @@
       <router-link to="/two"><a>two</a></router-link>
     </li>
     <li>
-      <router-link to="/three"><a>three</a></router-link>
+      <router-link to="/three/65"><a>three</a></router-link>
     </li>
     <li>
       <router-link to="/four"><a>four</a></router-link>
@@ -19,7 +19,10 @@
     <li>
       <router-link to="/five"><a>five</a></router-link>
     </li>
+    <router-view name="sixcom">header</router-view>
     <router-view></router-view>
+    <router-view name="sevencom">footer</router-view>
+
   </div>
 </template>
 
@@ -34,6 +37,7 @@ export default {
   name: "App",
   data() {
     return {
+      id:45
     };
   },
   methods: {}
