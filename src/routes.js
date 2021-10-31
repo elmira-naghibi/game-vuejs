@@ -6,7 +6,7 @@ import home from './components/routercom/home.vue';
 
 
 export const routes = [
-    { path: '', component: home },
+    { path: '', component: home ,name:'homme'},
     { path: '/one', component: one , children : [
         { path:'two', component:two},
         { path:'three', component:three},

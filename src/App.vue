@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <li>
-      <router-link to="/" active-class="active" exact><a>Home</a></router-link>
+      <router-link :to="{name:'homme', params:{ id:$route.params.id }, query:{local:'en', q:'10'}}" active-class="active" exact><a>Home</a></router-link>
     </li>
     <li>
       <router-link to="/one" active-class="active"><a>one/15</a></router-link>
